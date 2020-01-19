@@ -1,0 +1,44 @@
+// main: index.scss
+
+
+/* Header
+------------------------------------------------------------*/
+@import "main.scss";
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  /* overflow: hidden; */
+  min-height: 50px;
+  max-width: 100vw;
+  border-bottom: 0.5em solid $themeOrange;
+  h1 {
+    width: 40%;
+  }
+  ul.headernav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: center;
+    height: 40px;
+    width: 60%;
+    overflow: hidden;
+    li {
+      position: relative;
+      width: 25%;
+      text-align: center;
+      background-color: $themeGray;
+      padding-top: 0.3em;
+      z-index: 100;
+    }
+    li.active {
+      display: flex;
+      height: 100%;
+      background-color: $themeOrange;
+      span {
+        display: block;
+        margin: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+// main: index.scss
+
+
+/* Recieve
+------------------------------------------------------------*/
+@import "main.scss";
+
+.recieve {
+  margin: 30px;
+  label {
+    display: inline-block;
+    width: 200px;
+    margin: 2px;
+  }
+  button {
+    display: block;
+    height: 2em;
+    width: 20em;
+    margin: 20px;
+  }
+}
