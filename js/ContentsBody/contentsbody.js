@@ -31,11 +31,17 @@ function align(dis){
   $(".headernav li").removeClass("active");
   dis.delay(100).queue(function() {
     dis.addClass('active').dequeue();
+    if (index==1) {
+      reset_contents('.status');
+    }
     if (index==2) {
       reset_contents('.order');
     }
     else if (index==3) {
       reset_contents('.recieve');
+    }
+    else if (index==3) {
+      reset_contents('.checking');
     }
   });
 }
