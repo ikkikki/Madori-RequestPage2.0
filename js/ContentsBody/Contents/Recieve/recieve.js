@@ -39,7 +39,10 @@ function xmlChecker(){
   let xml = document.getElementById("xml");
   xml.addEventListener('change',(e) => {
     let d = e.target.files[0];
-    if(!d.type.match('text/xml')){
+    if(d.type.match('text/xml')){
+      let reader = new FileReader();
+      reader.readAsDataURL(d);
+    } else {
       alert('xmlファイルを選択してください');
       xml.value = null;
       console.log('type',d.type)
@@ -48,29 +51,37 @@ function xmlChecker(){
 }
 
 //  method for button pushed  #requestData
-async function Button_requestDataHandler(){
+function Button_requestDataHandler(){
   console.log('buttoned');
   let worker = document.getElementById('worker').value;
   let is_compass = document.getElementById("is_compass").checked;
   let upstair = document.getElementById("upstair").checked;
   let process_id = document.getElementById("process_id").value;
-  let filedata = document.getElementById("xml").files[0];
-  let check = new Map();
-  if(!worker){
-    console.log('noworker');
-    check.set('worker','クラウドワークス登録名が未入力です');
-  };
-  if(!process_id){
-    check.set('process_id','物件番号が未入力です');
-  };
-  if(!filedata){
-    check.set('filedata','xmlファイルが未入力です');
-  };
-  if (check.size){
-    recieveInputError(check);
-  } else {
-    let result = await PutXmlAPIcall(process_id,worker,is_compass,upstair);
+  let fdata = document.getElementById("xml").files[0];
+
+  let reader = new FileReader();
+  reader.onload = async function(){
+    let filedata = reader.result;
+    console.log('filedata',filedata);
+    let check = new Map();
+    if(!worker){
+      console.log('noworker');
+      check.set('worker','クラウドワークス登録名が未入力です');
+    };
+    if(!process_id){
+      check.set('process_id','物件番号が未入力です');
+    };
+    if(!filedata){
+      check.set('filedata','xmlファイルが未入力です');
+    };
+    if (check.size){
+      recieveInputError(check);
+    } else {
+      let result = await PutXmlAPIcall(process_id,worker,is_compass,upstair,filedata);
+      recieveAPIresult(result);
+    }
   }
+  reader.readAsDataURL(fdata);
 }
 
 //  modal action
@@ -89,9 +100,28 @@ function recieveInputError(map){
   $(DOM).show();
 }
 
+function recieveAPIresult(result){
+  let DOM = $('#modal');
+  let modalwindow = $('<div class="modalwindow"></div>');
+  let cap = document.createElement('p');
+  if (result['error']==='process_id'){
+    cap.innerText = '入力は半角数字でお願いします';
+    modalwindow.append($('<p>物件番号が読み取れませんでした</p>'));
+    modalwindow.append($('<p>番号を確認してください</p>'));
+  } else if (result['error']==='filedata') {
+    cap.innerText = 'xmlファイルが読み取れませんでした';
+  } else {
+    cap.innerText = '図面ファイルを登録しました';
+  }
+  modalwindow.append(cap);
+  modalwindow.append($('<button type="button" onclick="closeModal()">閉じる</button>'))
+  DOM.html(modalwindow);
+  $(DOM).show();
+}
+
 
 // ***  API call (put)
-function PutXmlAPIcall(process_id,worker,is_compass,upstair){
+function PutXmlAPIcall(process_id,worker,is_compass,upstair,filedata){
   const url = 'https://asia-northeast1-plan-proxy.cloudfunctions.net/F24_RequestDrawDataUpdateAPI'
   let obj = {
     'process_id': process_id,
