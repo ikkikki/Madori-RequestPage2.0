@@ -12,7 +12,6 @@ function HeaderDOM(){
   for (let i=0; i < inner.length; i++){
     header.append(inner[i]);
   };
-  console.log(header);
   $(DOM).append(header);
   headernavDOM();
 }
@@ -22,10 +21,10 @@ function HeaderDOM(){
 function headernavDOM(){
   let DOM = $('.headernav');
   let inner = [
-    $('<li><span>status</span></li>'),
-    $('<li><span>order</span></li>'),
-    $('<li><span>recieve</span></li>'),
-    $('<li><span>checking</span></li>'),
+    $('<li><span>受注状況</span></li>'),
+    $('<li><span>新規受注</span></li>'),
+    $('<li><span>作図納品</span></li>'),
+    $('<li><span>検収納品</span></li>'),
     ]
   for (let i=0; i < inner.length; i++){
     DOM.append(inner[i]);

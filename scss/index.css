@@ -45,7 +45,7 @@ img, abbr, acronym, fieldset {
   border: 0;
 }
 
-/* ContentsBody
+/* Global
 ------------------------------------------------------------*/
 body {
   min-height: 100vh;
@@ -55,20 +55,44 @@ li {
   list-style: none;
 }
 
+/* Modal
+------------------------------------------------------------*/
+#modal {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  background-color: rgba(100, 100, 100, 0.7);
+  z-index: 100;
+}
+
+#modal div {
+  margin: auto;
+  padding: 2em;
+  background-color: white;
+  opacity: 1;
+  font-weight: bold;
+}
+
+#modal div * {
+  margin: 5px;
+}
+
+#modal button {
+  margin: 20px;
+}
+
+/* ContentsBody
+------------------------------------------------------------*/
 #contentsbody {
   min-height: 100vh;
 }
 
 /* Header
 ------------------------------------------------------------*/
-body {
-  min-height: 100vh;
-}
-
-li {
-  list-style: none;
-}
-
 .header {
   display: flex;
   align-items: flex-end;
@@ -114,14 +138,6 @@ li {
 
 /* Recieve
 ------------------------------------------------------------*/
-body {
-  min-height: 100vh;
-}
-
-li {
-  list-style: none;
-}
-
 .recieve {
   margin: 30px;
 }

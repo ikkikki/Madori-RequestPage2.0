@@ -9,7 +9,7 @@ function ContentsDOM(){
   let DOM = document.getElementById('contentsbody');
   $(DOM).append('<div class="information"></div>');
   $(DOM).append('<div class="contents"></div>');
-  RecieveDOM();
+  RecieveMol();
 }
 
 

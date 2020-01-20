@@ -19,7 +19,6 @@ function contentSwitcher(){
   var dis = $(".headernav li").eq(0);
   $(".headernav li").eq(2).addClass('active');
   $(".recieve").addClass('active');
-  console.log('are');
   $(".headernav li").click(function(){
     dis = $(this);
     align(dis);

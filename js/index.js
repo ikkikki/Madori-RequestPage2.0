@@ -7,6 +7,7 @@ console.log('index running..')
 
 
 // OauthDOM();
+ModalDOM();
 ContentsBodyDOM();
 
 
