@@ -6,7 +6,7 @@ console.log('index running..')
 //  ContentsDOM() from contentsbody
 
 
-OauthProps();
+// OauthProps();
 ModalDOM();
 ContentsBodyDOM();
 

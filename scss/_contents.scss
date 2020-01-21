@@ -1,11 +1,12 @@
 // main: index.scss
 
 
-/* ContentsBody
+/* Contents
 ------------------------------------------------------------*/
 @import "main.scss";
 
-#contentsbody {
-  position: relative;
-  min-height: 100vh;
+.contents{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }

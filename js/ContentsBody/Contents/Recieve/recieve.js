@@ -1,9 +1,12 @@
 // *****  recieve  *****
 console.log('recieve running..')
 
+/* dependant */
+//  closeModal() from providers
+
 
 // ***** component
-async function RecieveMol(){
+async function RecieveProps(){
   await RecieveDOM();
   await xmlChecker();
 }
@@ -11,8 +14,8 @@ async function RecieveMol(){
 
 // *** DOM methods
 function RecieveDOM(){
-  let DOM = $('.contents');
-  let recieve = $('<div class="recieve"></div>');
+  let DOM = $('.recieve');
+  let recieve = $('<div class="recieveContents"></div>');
   recieve.append(rformsDOM('worker','text','クラウドワークス登録名'));
   recieve.append(rformsDOM('is_compass','checkbox','コンパス有り'));
   recieve.append(rformsDOM('upstair','checkbox','二階有り'));

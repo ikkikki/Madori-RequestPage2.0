@@ -1,0 +1,19 @@
+// main: index.scss
+
+
+/* Oauth
+------------------------------------------------------------*/
+@import "main.scss";
+
+.order{
+  width: 100%;
+  height: 100%;
+  button{
+    display: block;
+    width: 400px;
+    height: 200px;
+    margin: auto;
+    font-size: 3em;
+    background-color: $themeOrange;
+  }
+}
