@@ -18,7 +18,7 @@ async function ContentsBodyDOM(){
 function contentSwitcher(){
   var dis = $(".headernav li").eq(0);
   $(".headernav li").eq(2).addClass('active');
-  $(".recieve").addClass('active');
+  reset_contents('.recieve');
   $(".headernav li").click(function(){
     dis = $(this);
     align(dis);
