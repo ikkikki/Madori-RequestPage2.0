@@ -77,6 +77,7 @@ function Button_requestDataHandler(){
     if (check.size){
       recieveInputError(check);
     } else {
+      recieveWaiting();
       let result = await PutXmlAPIcall(process_id,worker,is_compass,upstair,filedata);
       recieveAPIresult(result);
     }
@@ -118,6 +119,18 @@ function recieveAPIresult(result){
   DOM.html(modalwindow);
   $(DOM).show();
 }
+
+function recieveWaiting(){
+  let DOM = $('#modal');
+  let modalwindow = $('<div class="modalwindow"></div>');
+  let cap = document.createElement('p');
+  cap.innerText = '図面ファイル登録中...';
+  modalwindow.append(cap);
+  modalwindow.append($('<button type="button" onclick="closeModal()">閉じる</button>'))
+  DOM.html(modalwindow);
+  $(DOM).show();
+}
+
 
 
 // ***  API call (put)

@@ -55,6 +55,24 @@ li {
   list-style: none;
 }
 
+/* Oauth
+------------------------------------------------------------*/
+#oauth {
+  text-align: center;
+}
+
+#oauth input {
+  height: 1.5em;
+  min-width: 300px;
+  margin: 5px;
+}
+
+#oauth button {
+  width: 200px;
+  height: 2em;
+  margin: 40px auto;
+}
+
 /* Modal
 ------------------------------------------------------------*/
 #modal {
