@@ -9,14 +9,17 @@ console.log('contents running..')
 // ***** component
 async function ContentsProps(){
   let mailaddress = sessionStorage.getItem('mailaddress');
-  let result = await datasAPIcall(mailaddress);
-  seStorageUpdate(result);
+  if (mailaddress){
+    let result = await RequestDatasAPIcall(mailaddress);
+    prdataUpdate(result);
+  };
   ContentsDOM();
 }
 
 
 // *** DOM methods
 function ContentsDOM(){
+  console.log('ContentsDOM running...')
   let DOM = document.getElementById('contentsbody');
   $(DOM).append('<div class="information"></div>');
   $(DOM).append('<div class="contents"></div>');
@@ -30,24 +33,26 @@ function ContentsDOM(){
 
 // ***  drive methods
 //  set sessionStorage data
-function seStorageUpdate(result){
+function prdataUpdate(result){
   sessionStorage.setItem('drowings',JSON.stringify(result['drowings']));
   sessionStorage.setItem('drowing_counts',result['drowing_counts']);
   let acceptable = (()=>{
     let limit = sessionStorage.getItem('draw_limit');
-    if (result['draw_limit']>limit){
+    console.log('lim',result['drowing_counts'],limit);
+    if (result['drowing_counts']>limit){
       return 'False';
     } else {
       return 'True';
     };
   })();
   sessionStorage.setItem('acceptable',acceptable);
+  OrderProps();
   console.log('sessionStorage updated with basedata')
 }
 
 
 // ***  API call (put)
-function datasAPIcall(mailaddress){
+function RequestDatasAPIcall(mailaddress){
   const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F22_RequestDatasAPI'
   let obj = {
     'mailaddress': mailaddress
