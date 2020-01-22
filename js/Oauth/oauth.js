@@ -44,6 +44,7 @@ async function EntoryCheker(){
     $('#modal').hide();
     $('#oauth').hide();
     $('#contentsbody').show();
+    sessionStorageUpdate(result);
     return;
   } else {
     let DOM = $('#modal');
@@ -63,6 +64,16 @@ async function EntoryCheker(){
   }
 }
 
+//  set sessionStorage data
+function sessionStorageUpdate(result){
+  // sessionStorage.setItem('mailaddress',JSON.stringify(json));
+  sessionStorage.setItem('worker_name',result['worker_name']);
+  sessionStorage.setItem('mailaddress',result['mailaddress']);
+  sessionStorage.setItem('draw_limit',result['draw_limit']);
+  console.log('sessionStorage updated with oauthed data')
+}
+
+//  modal waiting effects
 function oauthWaiting(){
   let DOM = $('#modal');
   let modalwindow = $('<div class="modalwindow"></div>');

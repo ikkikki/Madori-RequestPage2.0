@@ -7,7 +7,7 @@ console.log('contentsbody running..')
 
 async function ContentsBodyDOM(){
   await HeaderDOM();
-  await ContentsDOM();
+  await ContentsProps();
   contentSwitcher();
 }
 
