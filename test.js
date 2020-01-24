@@ -2,8 +2,13 @@
 
 
 
+let a;
 
+console.log(a)
 
+if (a.length){s
+  console.log('ore');
+}
 
 let res = {
   "es":"e",
@@ -12,6 +17,9 @@ let res = {
     'ore':'sama'
     }
 }
+
+
+
 
 
 console.log(Object.keys(res['ren'])[0])
