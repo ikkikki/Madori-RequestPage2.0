@@ -201,6 +201,7 @@ li {
 
 .order .requestImages {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .order .requestImages .ordercard {
