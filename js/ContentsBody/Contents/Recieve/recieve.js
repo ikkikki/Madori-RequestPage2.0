@@ -16,7 +16,7 @@ async function RecieveProps(){
 function RecieveDOM(){
   let DOM = $('.recieve');
   let recieve = $('<div class="recieveContents"></div>');
-  recieve.append(rformsDOM('worker','text','クラウドワークス登録名'));
+  recieve.append(rformsDOM('worker','text','登録メールアドレス'));
   recieve.append(rformsDOM('is_compass','checkbox','コンパス有り'));
   recieve.append(rformsDOM('upstair','checkbox','二階有り'));
   recieve.append(rformsDOM('process_id','text','物件番号'));
