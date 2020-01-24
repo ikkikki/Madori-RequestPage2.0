@@ -19,6 +19,7 @@
   .requestImages{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     .ordercard{
       position: relative;
       border: 2px solid $themeGray;
