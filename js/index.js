@@ -25,7 +25,9 @@ console.log('index running..');
     obs.observe(elem,cfg);
     return;
   } else {
+
     OauthProps();
+
     ContentsBodyProps();
   };
 })();

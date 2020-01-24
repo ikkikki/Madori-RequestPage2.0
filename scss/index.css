@@ -197,3 +197,11 @@ li {
   font-size: 3em;
   background-color: #ffb812;
 }
+
+.order .requestImages {
+  display: flex;
+}
+
+.order .requestImages .ordercard img {
+  width: 300px;
+}

@@ -16,4 +16,12 @@
     font-size: 3em;
     background-color: $themeOrange;
   }
+  .requestImages{
+    display: flex;
+    .ordercard{
+      img{
+        width: 300px;
+      }
+    }
+  }
 }
