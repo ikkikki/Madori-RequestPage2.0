@@ -40,7 +40,7 @@ function align(dis){
     else if (index==3) {
       reset_contents('.recieve');
     }
-    else if (index==3) {
+    else if (index==4) {
       reset_contents('.checking');
     }
   });
