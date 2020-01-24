@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* reset */
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
   margin: 0;
@@ -202,6 +203,27 @@ li {
   display: flex;
 }
 
+.order .requestImages .ordercard {
+  position: relative;
+  border: 2px solid #e5e2db;
+  border-radius: 5px;
+  margin: 15px 5px 5px 5px;
+  padding: 30px;
+}
+
 .order .requestImages .ordercard img {
+  margin-top: 15px;
   width: 300px;
+}
+
+.order .requestImages .ordercard::before {
+  position: absolute;
+  top: -0.6em;
+  background-color: #fff;
+  color: #999999;
+  content: "作図中";
+  font-weight: bold;
+  font-size: 1.3em;
+  left: 30px;
+  padding: 3px 10px;
 }
