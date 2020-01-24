@@ -9,13 +9,18 @@ console.log('order running..')
 async function OrderProps(){
   OrderDOM();
   let acceptable = sessionStorage.getItem('acceptable');
-  let drowings = JSON.parse(sessionStorage.getItem('drowings'));
-  // console.log(drowings.hasOwnProperty('status'));
-  if (Object.keys(drowings).length){
-    orderImgDOM(drowings);
+  let drawings = JSON.parse(sessionStorage.getItem('drawings'));
+  let requested = sessionStorage.getItem('requested');
+  // console.log(drawings.hasOwnProperty('status'));
+  if (Object.keys(drawings).length){
+    orderImgDOM(drawings);
   }
-  if (acceptable==='True'){
+  if (acceptable==='true'&&requested==='true'){
     orderButtonDOM();
+    // var p = document.getElementById('orderjpg');
+    // p.addEventListener('click',(function(){
+    //
+    // })(),false);
   }
   // let mailaddress = sessionStorage.getItem('mailaddress');
   // let data = await RequestOrderAPIcall(mailaddress);
@@ -60,7 +65,20 @@ function dataCheck(){
 //  action then #orderjpg pushed
 async function orderjpgPush(){
   let mailaddress = sessionStorage.getItem('mailaddress');
+  let limit = sessionStorage.getItem('draw_limit');
+  let drawings = JSON.parse(sessionStorage.getItem('drawings'));
   let data = await RequestOrderAPIcall(mailaddress);
+  if (data['error']){
+
+    // show modal no requests
+
+  } else if (data['ok']==='ok') {
+    console.log(data['drawings']);
+    let id = Object.keys(data['drawings'])[0]
+    let acceptable = 'false';
+    drawings[id] = data['drawings'];
+    await orderImgDOM(drawings);
+  }
 }
 
 

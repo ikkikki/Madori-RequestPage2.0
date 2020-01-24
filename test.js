@@ -7,14 +7,14 @@
 
 let res = {
   "es":"e",
-  "os":"o"
+  "os":"o",
+  'ren':{
+    'ore':'sama'
+    }
 }
 
-if(res["es"]==="es"){
-  console.log('yes')
-}
-console.log('end')
 
+console.log(Object.keys(res['ren'])[0])
 
 
 
