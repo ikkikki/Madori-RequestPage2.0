@@ -81,7 +81,7 @@ function Button_requestDataHandler(){
       recieveInputError(check);
     } else {
       recieveWaiting();
-      let result = await PutXmlAPIcall(process_id,worker,is_compass,upstair,filedata);
+      let result = await RequestDrawDataUpdateAPIcall(process_id,worker,is_compass,upstair,filedata);
       recieveAPIresult(result);
     }
   }
@@ -137,7 +137,7 @@ function recieveWaiting(){
 
 
 // ***  API call (put)
-function PutXmlAPIcall(process_id,worker,is_compass,upstair,filedata){
+function RequestDrawDataUpdateAPIcall(process_id,worker,is_compass,upstair,filedata){
   const url = 'https://asia-northeast1-plan-proxy.cloudfunctions.net/F24_RequestDrawDataUpdateAPI'
   let obj = {
     'process_id': process_id,

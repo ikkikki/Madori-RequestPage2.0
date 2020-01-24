@@ -5,9 +5,9 @@ console.log('contentsbody running..')
 //  HeaderDOM() from header
 
 
-async function ContentsBodyDOM(){
+async function ContentsBodyProps(){
   await HeaderDOM();
-  await ContentsDOM();
+  await ContentsProps();
   contentSwitcher();
 }
 
