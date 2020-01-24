@@ -17,8 +17,8 @@ async function ContentsBodyProps(){
 // ***  drive methods
 function contentSwitcher(){
   var dis = $(".headernav li").eq(0);
-  $(".headernav li").eq(2).addClass('active');
-  reset_contents('.recieve');
+  $(".headernav li").eq(1).addClass('active');
+  reset_contents('.order');
   $(".headernav li").click(function(){
     dis = $(this);
     align(dis);
