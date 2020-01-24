@@ -57,8 +57,8 @@ function orderImgDOM(json_data){
     li.append(title);
     li.append(period);
     li.append(img);
+    gallary.append(li);
   }
-  gallary.append(li);
   DOM.append(gallary);
 }
 
