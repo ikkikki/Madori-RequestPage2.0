@@ -25,7 +25,7 @@ function RecieveDOM(){
   DOM.html(recieve);
   let mail = document.getElementById('worker');
   console.log('mal1',sessionStorage.getItem('mailaddress'));
-  mail.placeholder = sessionStorage.getItem('mailaddress');
+  mail.value = sessionStorage.getItem('mailaddress');
   console.log('mal',mail.placeholder);
   let id = document.getElementById('process_id');
   id.placeholder = Object.keys(JSON.parse(sessionStorage.getItem('drawings')))[0];
