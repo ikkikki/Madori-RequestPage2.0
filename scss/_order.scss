@@ -19,9 +19,27 @@
   .requestImages{
     display: flex;
     .ordercard{
+      position: relative;
+      border: 2px solid $themeGray;
+      border-radius: 5px;
+      margin: 15px 5px 5px 5px;
+      padding: 30px;
       img{
+        margin-top: 15px;
         width: 300px;
       }
+    }
+    .ordercard::before {
+      position: absolute;
+      top: -0.6em;
+      background-color: #fff;
+      color: $textGray;
+      content: "作図中";
+      font-weight: bold;
+      font-size: 1.3em;
+      left: 30px;
+      padding: 3px 10px;
+
     }
   }
 }
