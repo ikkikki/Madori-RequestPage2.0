@@ -26,6 +26,7 @@ function ContentsDOM(){
   let contents = $('.contents');
   $(contents).append('<div class="recieve"></div>');
   $(contents).append('<div class="order"></div>');
+  $(contents).append('<div class="checking"></div>');
   RecieveProps();
   OrderProps();
 }
