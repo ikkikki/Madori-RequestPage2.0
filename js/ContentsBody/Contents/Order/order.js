@@ -41,17 +41,24 @@ function orderButtonDOM(){
 }
 
 function orderImgDOM(json_data){
+  console.log('orderImgDOM running..')
   let DOM = $('.orderContents');
   let gallary = $('<ul class="requestImages"></ul>');
   for (let key in json_data){
     dic = json_data[key];
-    console.log('ddd',dic);
+    title = document.createElement('p');
+    title.innerText = '物件番号　：'+key;
+    period = document.createElement('p');
+    period.innerText = '作図納期　：'+dic['period'];
+    li = document.createElement('li');
+    li.classList.add('ordercard');
     img = document.createElement('img');
-    console.log('jpg',dic['requestjpg']);
-    console.log('jpg',dic['status']);
     img.src = dic['requestjpg'];
-    gallary.append(img);
+    li.append(title);
+    li.append(period);
+    li.append(img);
   }
+  gallary.append(li);
   DOM.append(gallary);
 }
 
