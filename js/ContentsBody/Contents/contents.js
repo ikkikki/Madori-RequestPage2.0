@@ -34,15 +34,16 @@ function ContentsDOM(){
 // ***  drive methods
 //  set sessionStorage data
 function prdataUpdate(result){
-  sessionStorage.setItem('drowings',JSON.stringify(result['drowings']));
-  sessionStorage.setItem('drowing_counts',result['drowing_counts']);
+  sessionStorage.setItem('drawings',JSON.stringify(result['drawings']));
+  sessionStorage.setItem('drawing_counts',result['drawing_counts']);
+  sessionStorage.setItem('requested',result['requested']);
   let acceptable = (()=>{
     let limit = sessionStorage.getItem('draw_limit');
-    console.log('lim',result['drowing_counts'],limit);
-    if (result['drowing_counts']>limit){
-      return 'False';
+    console.log('lim',result['drawing_counts'],limit);
+    if (result['drawing_counts']>limit){
+      return 'false';
     } else {
-      return 'True';
+      return 'true';
     };
   })();
   sessionStorage.setItem('acceptable',acceptable);

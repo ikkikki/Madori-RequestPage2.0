@@ -64,96 +64,26 @@ function dataCheck(){
 
 //  action then #orderjpg pushed
 async function orderjpgPush(){
-  orderWaiting();
   let mailaddress = sessionStorage.getItem('mailaddress');
   let limit = sessionStorage.getItem('draw_limit');
   let drawings = JSON.parse(sessionStorage.getItem('drawings'));
   let data = await RequestOrderAPIcall(mailaddress);
   if (data['error']){
 
-    orderError();
+    // show modal no requests
 
   } else if (data['ok']==='ok') {
+    console.log(data['drawings']);
     let id = Object.keys(data['drawings'])[0]
     let acceptable = 'false';
-    if (drawings.length){
-      drawings[id] = data['drawings'];
-    } else {
-      drawings = data['drawings'];
-    }
+    drawings[id] = data['drawings'];
     await orderImgDOM(drawings);
-    $('#orderjpg').hide();
-    $('#modal').hide();
   }
 }
 
-
-
-// *  modal action
-//  error
-function orderError(){
+//  modal action
+function recieveWaiting(){
   let DOM = $('#modal');
   let modalwindow = $('<div class="modalwindow"></div>');
   let cap = document.createElement('p');
-  cap.innerText = '現在お願いできる図面がありません　しばらくお待ちください';
-  modalwindow.append(cap);
-  modalwindow.append($('<button type="button" onclick="closeModal()">閉じる</button>'))
-  DOM.html(modalwindow);
-  $(DOM).show();
-}
-
-//   waithing
-function orderWaiting(){
-  let DOM = $('#modal');
-  let modalwindow = $('<div class="modalwindow"></div>');
-  let cap = document.createElement('p');
-  cap.innerText = '受注図面取得中...';
-  modalwindow.append(cap);
-  DOM.html(modalwindow);
-  $(DOM).show();
-}
-
-// ***  API call (put)
-function RequestOrderAPIcall(mailaddress){
-  const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F23_RequestOrderAPI'
-  let obj = {
-    'mailaddress' : mailaddress,
-  }
-  let result = fetch(url,{
-    mode: 'cors',
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
-  }).then(function(response){
-    return response.json();
-  }).then(function(data){
-    console.log(data);
-    return data;
-  });
-  return result;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ***  DOM methods
-
-
-// ***  drive methods
+  cap.innerText = '

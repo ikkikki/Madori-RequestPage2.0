@@ -72,14 +72,15 @@ function workerdataUpdate(result){
 
 //  set sessionStorage data
 function prdataUpdate(result){
-  sessionStorage.setItem('drowings',JSON.stringify(result['drowings']));
-  sessionStorage.setItem('drowing_counts',result['drowing_counts']);
+  sessionStorage.setItem('drawings',JSON.stringify(result['drawings']));
+  sessionStorage.setItem('drawing_counts',result['drawing_counts']);
+  sessionStorage.setItem('requested',result['requested']);
   let acceptable = (()=>{
     let limit = sessionStorage.getItem('draw_limit');
-    if (result['draw_limit']>limit){
-      return 'False';
+    if (result['drawing_counts']<limit){
+      return 'true';
     } else {
-      return 'True';
+      return 'false';
     };
   })();
   sessionStorage.setItem('acceptable',acceptable);
