@@ -23,6 +23,12 @@ function RecieveDOM(){
   recieve.append(rformsDOM('xml','file','xmlファイル'));
   recieve.append($('<button id="requestData" type="button"  onclick="Button_requestDataHandler()">図面登録</button>'));
   DOM.html(recieve);
+  let mail = document.getElementById('worker');
+  console.log('mal1',sessionStorage.getItem('mailaddress'));
+  mail.placeholder = sessionStorage.getItem('mailaddress');
+  console.log('mal',mail.placeholder);
+  let id = document.getElementById('process_id');
+  id.placeholder = Object.keys(JSON.parse(sessionStorage.getItem('drawings')))[0];
 }
 
 function rformsDOM(id,type,val){
