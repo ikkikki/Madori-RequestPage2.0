@@ -35,6 +35,7 @@
     .checkcard::before {
       position: absolute;
       top: -0.6em;
+      background-color: #fff;
       color: $textGray;
       content: "検収中";
       font-weight: bold;
