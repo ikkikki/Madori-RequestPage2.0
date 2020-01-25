@@ -183,7 +183,7 @@ li {
   margin: 20px;
 }
 
-/* Oauth
+/* Order
 ------------------------------------------------------------*/
 .order {
   width: 100%;
@@ -224,6 +224,52 @@ li {
   background-color: #fff;
   color: #999999;
   content: "作図中";
+  font-weight: bold;
+  font-size: 1.3em;
+  left: 30px;
+  padding: 3px 10px;
+}
+
+/* Checking
+------------------------------------------------------------*/
+.checking {
+  width: 100%;
+  height: 100%;
+}
+
+.checking button {
+  display: block;
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  font-size: 3em;
+  background-color: #ffb812;
+}
+
+.checking .checkedImages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.checking .checkedImages .checkcard {
+  position: relative;
+  border: 2px solid #e5e2db;
+  border-radius: 5px;
+  margin: 20px 10px 10px 5px;
+  padding: 30px;
+}
+
+.checking .checkedImages .checkcard img {
+  margin-top: 15px;
+  width: 300px;
+}
+
+.checking .checkedImages .checkcard::before {
+  position: absolute;
+  top: -0.6em;
+  color: #999999;
+  content: "検収中";
   font-weight: bold;
   font-size: 1.3em;
   left: 30px;
