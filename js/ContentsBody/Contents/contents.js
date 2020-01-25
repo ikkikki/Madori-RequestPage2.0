@@ -29,6 +29,7 @@ function ContentsDOM(){
   $(contents).append('<div class="checking"></div>');
   RecieveProps();
   OrderProps();
+  CheckingProps();
 }
 
 
