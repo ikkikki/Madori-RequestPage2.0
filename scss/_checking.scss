@@ -1,11 +1,11 @@
 // main: index.scss
 
 
-/* Order
+/* Checking
 ------------------------------------------------------------*/
 @import "main.scss";
 
-.order{
+.checking{
   width: 100%;
   height: 100%;
   button{
@@ -16,11 +16,11 @@
     font-size: 3em;
     background-color: $themeOrange;
   }
-  .requestImages{
+  .checkedImages{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    .ordercard{
+    .checkcard{
       position: relative;
       border: 2px solid $themeGray;
       border-radius: 5px;
@@ -32,12 +32,11 @@
 
       }
     }
-    .ordercard::before {
+    .checkcard::before {
       position: absolute;
       top: -0.6em;
-      background-color: #fff;
       color: $textGray;
-      content: "作図中";
+      content: "検収中";
       font-weight: bold;
       font-size: 1.3em;
       left: 30px;
