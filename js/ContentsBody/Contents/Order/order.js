@@ -54,12 +54,33 @@ function orderImgDOM(json_data){
     li.classList.add('ordercard');
     img = document.createElement('img');
     img.src = dic['requestjpg'];
+    // img.addEventListener('click', downloadFromUrl(), false);
     li.append(title);
     li.append(period);
     li.append(img);
     gallary.append(li);
   }
   DOM.append(gallary);
+
+}
+
+function downloadFromUrlAutomatically(url, fileName){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'blob';
+  xhr.onload = function(e){
+    if(this.status == 200){
+      var urlUtil = window.URL || window.webkitURL;
+      var imgUrl = urlUtil.createObjectURL(this.response);
+      var link = document.createElement('a');
+      link.href=imgUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link)
+    }
+  };
+  xhr.send();
 }
 
 

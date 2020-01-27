@@ -41,9 +41,34 @@ function checkingImgDOM(checking_datas){
     li.append(orimg);
     li.append(primg);
     gallary.append(li);
+    gallary.append(approveButtonDOM(key));
+    // gallary.append(rewriteButtonDOM(key));
   }
   DOM.append(gallary);
 }
+
+function approveButtonDOM(id){
+  let button = document.createElement('button');
+  [button.type,button.innerText] = ['button','approve'];
+  button.setAttribute('onclick','RequestCheckedDataUpdateAPIcall(id)')
+  return button;
+}
+
+function rewriteButtonDOM(id){
+  let form = document.createElement('form');
+  let label = document.createElement('label');
+  let input = document.createElement('input');
+  let button = document.createElement('button');
+  [label.htmlFor,label.innerText] = ['rewriteInput'+id,'xmlファイル'];
+  [input.id,input.type] = ['rewriteInput'+id,'file'];
+  [button.type,button.innerText] = ['button','rewrite file'];
+  button.setAttribute('onclick','test(id)');
+  form.append(label);
+  form.append(input);
+  form.append(button);
+  return form;
+}
+
 
 // ***  drive methods
 //  check is data showable images
@@ -57,8 +82,6 @@ function drawingsCheck() {
       checking_datas[key] = data;
     }
   }
-  console.log(drawings);
-  console.log(checking_datas);
   return checking_datas;
 }
 
@@ -67,7 +90,27 @@ function drawingsCheck() {
 
 
 // ***  API call (put)
-
+function RequestCheckedDataUpdateAPIcall(process_id){
+  const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F26_RequestCheckedDataUpdateAPI'
+  let obj = {
+    'process_id': process_id,
+  }
+  let result = fetch(url,{
+    mode: 'cors',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }).then(function(response){
+    return response.json();
+  }).then(function(data){
+    console.log(data);
+    return data;
+  });
+  return result;
+  }
 
 
 
