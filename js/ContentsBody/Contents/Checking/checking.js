@@ -82,7 +82,7 @@ function rewriteButtonDOM(id){
   let button = document.createElement('button');
   [label.htmlFor,label.innerText] = ['rewriteInput'+id,'xmlファイル'];
   [input.id,input.type] = ['rewriteInput'+id,'file'];
-  [button.type,button.innerText] = ['button','rewrite file'];
+  [button.type,button.innerText,button.dataset.process_id] = ['button','rewrite file',id];
   button.setAttribute('onclick','rewriteButtonAct(this)');
   form.append(label);
   form.append(input);
