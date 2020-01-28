@@ -43,7 +43,7 @@ function checkingImgDOM(checking_datas){
     li.append(primg);
     gallary.append(li);
     gallary.append(approveButtonDOM(key));
-    // gallary.append(rewriteButtonDOM(key));
+    gallary.append(rewriteButtonDOM(key));
     // approveButtonAct(ga);
   }
   DOM.html(gallary);
@@ -52,13 +52,12 @@ function checkingImgDOM(checking_datas){
 
 function approveButtonDOM(id){
   let button = document.createElement('button');
-  [button.type,button.innerText,button.dataset.process_id] = ['button','図面承認',id];
+  [button.type,button.innerText,button.dataset.process_id] = ['button','検収完了',id];
   button.setAttribute('onclick','approveButtonAct(this)');
   return button;
 }
 
 async function approveButtonAct(elm){
-
   let process_id = elm.dataset.process_id;
   console.log('dddid',process_id)
   approveWaiting();
@@ -72,46 +71,10 @@ async function approveButtonAct(elm){
       await prdataUpdate(result);
       let checking_datas = await drawingsCheck();
       await checkingImgDOM(checking_datas);
-      $('#modal').hide();
+      approveSuccess();
     };
   }
 }
-  // elm.addEventListener('click',async function(){
-  //   approveWaiting();
-  //   let res = await RequestCheckedDataUpdateAPIcall(process_id);
-  //   if (res['error']){
-  //     approveError();
-  //   } else if (res['ok']==='ok') {
-  //     let mailaddress = sessionStorage.getItem('mailaddress');
-  //     if (mailaddress){
-  //       let result = await RequestDatasAPIcall(mailaddress);
-  //       await prdataUpdate(result);
-  //       let checking_datas = await drawingsCheck();
-  //       await checkingImgDOM(checking_datas);
-  //       $('#modal').hide();
-  //     };
-  //   }
-  // },false);
-
-
-// function approveButtonAct(elm,process_id){
-//   elm.addEventListener('click',async function(){
-//     approveWaiting();
-//     let res = await RequestCheckedDataUpdateAPIcall(process_id);
-//     if (res['error']){
-//       approveError();
-//     } else if (res['ok']==='ok') {
-//       let mailaddress = sessionStorage.getItem('mailaddress');
-//       if (mailaddress){
-//         let result = await RequestDatasAPIcall(mailaddress);
-//         await prdataUpdate(result);
-//         let checking_datas = await drawingsCheck();
-//         await checkingImgDOM(checking_datas);
-//         $('#modal').hide();
-//       };
-//     }
-//   },false);
-// }
 
 function rewriteButtonDOM(id){
   let form = document.createElement('form');
@@ -187,6 +150,17 @@ function approveWaiting(){
   $(DOM).show();
 }
 
+//  success
+function approveSuccess(){
+  let DOM = $('#modal');
+  let modalwindow = $('<div class="modalwindow"></div>');
+  let cap = document.createElement('p');
+  cap.innerText = '図面承認完了しました';
+  modalwindow.append(cap);
+  modalwindow.append($('<button type="button" onclick="closeModal()">閉じる</button>'))
+  DOM.html(modalwindow);
+  $(DOM).show();
+}
 
 // ***  API call (put)
 function RequestCheckedDataUpdateAPIcall(process_id){
