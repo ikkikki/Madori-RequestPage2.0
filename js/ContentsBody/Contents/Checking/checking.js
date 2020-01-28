@@ -115,10 +115,11 @@ async function rewriteButtonAct(elm){
   let process_id = elm.dataset.process_id;
   let fdata = elm.previousElementSibling.files[0];
   let reader = new FileReader();
+  let result;
   Waiting('修正図面登録中...');
   reader.onload = async function(){
     let filedata = reader.result;
-    let result = await RequestRewriteAPIcall(process_id,filedata);
+    result = await RequestRewriteAPIcall(process_id,filedata);
   }
   reader.readAsDataURL(fdata);
   if (result['error']){
