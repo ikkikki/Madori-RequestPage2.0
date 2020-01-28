@@ -10,6 +10,7 @@ async function CheckingProps(){
   CheckingDOM();
   let checking_datas = drawingsCheck();
   checkingImgDOM(checking_datas);
+  xmlsChecker();
 }
 
 
@@ -44,10 +45,8 @@ function checkingImgDOM(checking_datas){
     gallary.append(li);
     gallary.append(approveButtonDOM(key));
     gallary.append(rewriteButtonDOM(key));
-    // approveButtonAct(ga);
   }
   DOM.html(gallary);
-
 }
 
 function approveButtonDOM(id){
@@ -59,8 +58,7 @@ function approveButtonDOM(id){
 
 async function approveButtonAct(elm){
   let process_id = elm.dataset.process_id;
-  console.log('dddid',process_id)
-  approveWaiting();
+  Waiting('依頼完了登録中...');
   let result = await RequestCheckedDataUpdateAPIcall(process_id);
   if (result['error']){
     approveError();
@@ -80,15 +78,56 @@ function rewriteButtonDOM(id){
   let form = document.createElement('form');
   let label = document.createElement('label');
   let input = document.createElement('input');
+  input.classList.add('rewrite');
   let button = document.createElement('button');
   [label.htmlFor,label.innerText] = ['rewriteInput'+id,'xmlファイル'];
   [input.id,input.type] = ['rewriteInput'+id,'file'];
   [button.type,button.innerText] = ['button','rewrite file'];
-  button.setAttribute('onclick','test(id)');
+  button.setAttribute('onclick','rewriteButtonAct(this)');
   form.append(label);
   form.append(input);
   form.append(button);
   return form;
+}
+
+//  varidate file
+function xmlsChecker(){
+  let xml = document.getElementsByClassName("rewrite");
+  for (let x = 0; x < xml.length; x++) {
+    let elm = xml[x];
+    console.log('xml',xml);
+    console.log('el',elm);
+    elm.addEventListener('change',(e) => {
+      let d = e.target.files[0];
+      if(d.type.match('text/xml')){
+        let reader = new FileReader();
+        reader.readAsDataURL(d);
+      } else {
+        alert('xmlファイルを選択してください');
+        elm.value = null;
+        console.log('type',d.type)
+      };
+    },false);
+  }
+}
+
+async function rewriteButtonAct(elm){
+  let process_id = elm.dataset.process_id;
+  let filedata = elm.previousElementSibling.files[0];
+  Waiting('修正図面登録中...');
+  let result = await RequestRewriteAPIcall(process_id,filedata);
+  if (result['error']){
+    approveError();
+  } else if (result['ok']==='ok') {
+    let mailaddress = sessionStorage.getItem('mailaddress');
+    if (mailaddress){
+      let result = await RequestDatasAPIcall(mailaddress);
+      await prdataUpdate(result);
+      let checking_datas = await drawingsCheck();
+      await checkingImgDOM(checking_datas);
+      rewriteSuccess();
+    };
+  }
 }
 
 
@@ -126,6 +165,7 @@ function prdataUpdate(result){
   console.log('sessionStorage updated with basedata')
 }
 
+
 // *  modal action
 //  error
 function approveError(){
@@ -140,11 +180,11 @@ function approveError(){
 }
 
 //   waithing
-function approveWaiting(){
+function Waiting(text){
   let DOM = $('#modal');
   let modalwindow = $('<div class="modalwindow"></div>');
   let cap = document.createElement('p');
-  cap.innerText = '依頼完了登録中...';
+  cap.innerText = text;
   modalwindow.append(cap);
   DOM.html(modalwindow);
   $(DOM).show();
@@ -161,6 +201,19 @@ function approveSuccess(){
   DOM.html(modalwindow);
   $(DOM).show();
 }
+
+function rewriteSuccess(){
+  let DOM = $('#modal');
+  let modalwindow = $('<div class="modalwindow"></div>');
+  let cap = document.createElement('p');
+  cap.innerText = '図面更新完了しました';
+  modalwindow.append(cap);
+  modalwindow.append($('<button type="button" onclick="closeModal()">閉じる</button>'))
+  DOM.html(modalwindow);
+  $(DOM).show();
+}
+
+
 
 // ***  API call (put)
 function RequestCheckedDataUpdateAPIcall(process_id){
@@ -208,7 +261,29 @@ function RequestDatasAPIcall(mailaddress){
   return result;
 }
 
-
+function RequestRewriteAPIcall(process_id,worker,filedata){
+  const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F25_RequestRewriteAPI';
+  let obj = {
+    'process_id': process_id,
+    'worker': worker,
+    'filedata': filedata
+  }
+  let result = fetch(url,{
+    mode: 'cors',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }).then(function(response){
+    return response.json();
+  }).then(function(data){
+    console.log(data);
+    return data;
+  });
+  return result;
+}
 
 
 
