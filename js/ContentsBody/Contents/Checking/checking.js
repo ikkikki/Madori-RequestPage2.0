@@ -119,21 +119,22 @@ async function rewriteButtonAct(elm){
   Waiting('修正図面登録中...');
   reader.onload = async function(){
     let filedata = reader.result;
-    result = await RequestRewriteAPIcall(process_id,filedata);
+    console.log('p',process_id);
+    let result = await RequestRewriteAPIcall(process_id,filedata);
+    if (result['error']){
+      approveError();
+    } else if (result['ok']==='ok') {
+      let mailaddress = sessionStorage.getItem('mailaddress');
+      if (mailaddress){
+        let result = await RequestDatasAPIcall(mailaddress);
+        await prdataUpdate(result);
+        let checking_datas = await drawingsCheck();
+        await checkingImgDOM(checking_datas);
+        rewriteSuccess();
+      };
+    }
   }
   reader.readAsDataURL(fdata);
-  if (result['error']){
-    approveError();
-  } else if (result['ok']==='ok') {
-    let mailaddress = sessionStorage.getItem('mailaddress');
-    if (mailaddress){
-      let result = await RequestDatasAPIcall(mailaddress);
-      await prdataUpdate(result);
-      let checking_datas = await drawingsCheck();
-      await checkingImgDOM(checking_datas);
-      rewriteSuccess();
-    };
-  }
 }
 
 
