@@ -52,30 +52,66 @@ function checkingImgDOM(checking_datas){
 
 function approveButtonDOM(id){
   let button = document.createElement('button');
-  [button.type,button.innerText] = ['button','approve'];
-  // button.setAttribute('onclick','RequestCheckedDataUpdateAPIcall(id)')
-  approveButtonAct(button,id);
+  [button.type,button.innerText,button.dataset.process_id] = ['button','approve',id];
+  button.setAttribute('onclick','approveButtonAct(this)');
   return button;
 }
 
-function approveButtonAct(elm,process_id){
-  elm.addEventListener('click',async function(){
-    approveWaiting();
-    let res = await RequestCheckedDataUpdateAPIcall(process_id);
-    if (res['error']){
-      approveError();
-    } else if (res['ok']==='ok') {
-      let mailaddress = sessionStorage.getItem('mailaddress');
-      if (mailaddress){
-        let result = await RequestDatasAPIcall(mailaddress);
-        await prdataUpdate(result);
-        let checking_datas = await drawingsCheck();
-        await checkingImgDOM(checking_datas);
-        $('#modal').hide();
-      };
-    }
-  },false);
+async function approveButtonAct(elm){
+
+  let process_id = elm.dataset.process_id;
+  console.log('dddid',process_id)
+  approveWaiting();
+  let result = await RequestCheckedDataUpdateAPIcall(process_id);
+  if (result['error']){
+    approveError();
+  } else if (result['ok']==='ok') {
+    let mailaddress = sessionStorage.getItem('mailaddress');
+    if (mailaddress){
+      let result = await RequestDatasAPIcall(mailaddress);
+      await prdataUpdate(result);
+      let checking_datas = await drawingsCheck();
+      await checkingImgDOM(checking_datas);
+      $('#modal').hide();
+    };
+  }
 }
+  // elm.addEventListener('click',async function(){
+  //   approveWaiting();
+  //   let res = await RequestCheckedDataUpdateAPIcall(process_id);
+  //   if (res['error']){
+  //     approveError();
+  //   } else if (res['ok']==='ok') {
+  //     let mailaddress = sessionStorage.getItem('mailaddress');
+  //     if (mailaddress){
+  //       let result = await RequestDatasAPIcall(mailaddress);
+  //       await prdataUpdate(result);
+  //       let checking_datas = await drawingsCheck();
+  //       await checkingImgDOM(checking_datas);
+  //       $('#modal').hide();
+  //     };
+  //   }
+  // },false);
+
+
+// function approveButtonAct(elm,process_id){
+//   elm.addEventListener('click',async function(){
+//     approveWaiting();
+//     let res = await RequestCheckedDataUpdateAPIcall(process_id);
+//     if (res['error']){
+//       approveError();
+//     } else if (res['ok']==='ok') {
+//       let mailaddress = sessionStorage.getItem('mailaddress');
+//       if (mailaddress){
+//         let result = await RequestDatasAPIcall(mailaddress);
+//         await prdataUpdate(result);
+//         let checking_datas = await drawingsCheck();
+//         await checkingImgDOM(checking_datas);
+//         $('#modal').hide();
+//       };
+//     }
+//   },false);
+// }
 
 function rewriteButtonDOM(id){
   let form = document.createElement('form');
