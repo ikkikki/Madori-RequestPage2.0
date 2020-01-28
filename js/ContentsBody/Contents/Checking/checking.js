@@ -113,9 +113,14 @@ function xmlsChecker(){
 
 async function rewriteButtonAct(elm){
   let process_id = elm.dataset.process_id;
-  let filedata = elm.previousElementSibling.files[0];
+  let fdata = elm.previousElementSibling.files[0];
+  let reader = new FileReader();
   Waiting('修正図面登録中...');
-  let result = await RequestRewriteAPIcall(process_id,filedata);
+  reader.onload = async function(){
+    let filedata = reader.result;
+    let result = await RequestRewriteAPIcall(process_id,filedata);
+  }
+  reader.readAsDataURL(fdata);
   if (result['error']){
     approveError();
   } else if (result['ok']==='ok') {
@@ -261,11 +266,10 @@ function RequestDatasAPIcall(mailaddress){
   return result;
 }
 
-function RequestRewriteAPIcall(process_id,worker,filedata){
+function RequestRewriteAPIcall(process_id,filedata){
   const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F25_RequestRewriteAPI';
   let obj = {
     'process_id': process_id,
-    'worker': worker,
     'filedata': filedata
   }
   let result = fetch(url,{
