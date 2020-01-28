@@ -52,7 +52,7 @@ function checkingImgDOM(checking_datas){
 
 function approveButtonDOM(id){
   let button = document.createElement('button');
-  [button.type,button.innerText,button.dataset.process_id] = ['button','approve',id];
+  [button.type,button.innerText,button.dataset.process_id] = ['button','図面承認',id];
   button.setAttribute('onclick','approveButtonAct(this)');
   return button;
 }
