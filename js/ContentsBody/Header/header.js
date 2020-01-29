@@ -21,10 +21,10 @@ function HeaderDOM(){
 function headernavDOM(){
   let DOM = $('.headernav');
   let inner = [
-    $('<li><span>受注状況</span></li>'),
     $('<li><span>新規受注</span></li>'),
     $('<li><span>作図納品</span></li>'),
     $('<li><span>検収納品</span></li>'),
+    $('<li><span>受注履歴</span></li>'),
     ]
   for (let i=0; i < inner.length; i++){
     DOM.append(inner[i]);

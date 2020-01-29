@@ -87,6 +87,7 @@ function prdataUpdate(result){
   console.log('sessionStorage updated with basedata')
 }
 
+
 //  modal waiting effects
 function oauthWaiting(){
   let DOM = $('#modal');
