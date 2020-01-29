@@ -237,15 +237,6 @@ li {
   height: 100%;
 }
 
-.checking button {
-  display: block;
-  width: 400px;
-  height: 200px;
-  margin: auto;
-  font-size: 3em;
-  background-color: #ffb812;
-}
-
 .checking .checkedImages {
   display: flex;
   flex-wrap: wrap;
@@ -262,7 +253,34 @@ li {
 
 .checking .checkedImages .checkcard img {
   margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
   width: 300px;
+}
+
+.checking .checkedImages .checkcard .btnbox {
+  display: inline-flex;
+  align-items: flex-end;
+  margin: 5px;
+}
+
+.checking .checkedImages .checkcard .btnbox form {
+  width: 50%;
+  text-align: center;
+  margin: 15px;
+}
+
+.checking .checkedImages .checkcard .btnbox form label {
+  display: inline-block;
+  margin: 10px;
+}
+
+.checking .checkedImages .checkcard .btnbox form button {
+  width: 200px;
+  height: 50px;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  background-color: #ffb812;
 }
 
 .checking .checkedImages .checkcard::before {
