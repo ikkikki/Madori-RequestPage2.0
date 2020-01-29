@@ -7,9 +7,9 @@ console.log('checking running..')
 
 // ***** component
 async function CheckingProps(){
-  CheckingDOM();
-  let checking_datas = drawingsCheck();
-  checkingImgDOM(checking_datas);
+  await CheckingDOM();
+  let checking_datas = await drawingsCheck();
+  await checkingImgDOM(checking_datas);
   xmlsChecker();
 }
 
@@ -42,23 +42,29 @@ function checkingImgDOM(checking_datas){
     li.append(period);
     li.append(orimg);
     li.append(primg);
+    btnbox = document.createElement('div');
+    btnbox.classList.add('btnbox');
+    btnbox.append(rewriteButtonDOM(key));
+    btnbox.append(approveButtonDOM(key));
+    li.append(btnbox);
     gallary.append(li);
-    gallary.append(approveButtonDOM(key));
-    gallary.append(rewriteButtonDOM(key));
+
   }
   DOM.html(gallary);
 }
 
 function approveButtonDOM(id){
+  let form = document.createElement('form');
   let button = document.createElement('button');
   [button.type,button.innerText,button.dataset.process_id] = ['button','検収完了',id];
   button.setAttribute('onclick','approveButtonAct(this)');
-  return button;
+  form.appendChild(button);
+  return form;
 }
 
 async function approveButtonAct(elm){
   let process_id = elm.dataset.process_id;
-  Waiting('依頼完了登録中...');
+  Waiting('検収完了登録中...');
   let result = await RequestCheckedDataUpdateAPIcall(process_id);
   if (result['error']){
     approveError();
@@ -132,7 +138,7 @@ async function rewriteButtonAct(elm){
         await checkingImgDOM(checking_datas);
         rewriteSuccess();
       };
-    }
+    };
   }
   reader.readAsDataURL(fdata);
 }
