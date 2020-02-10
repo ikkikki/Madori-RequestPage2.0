@@ -141,9 +141,10 @@ function recieveWaiting(){
 function RequestDrawDataUpdateAPIcall(filedata){
   const url = 'https://us-central1-plan-proxy.cloudfunctions.net/F41_ControlRaw1FAPI'
   let obj = {
+    // 'customer_id': 1,
     'customer_id': 0,
-    'customer_romans' : 'test',
-    'order_id' : 0001,
+    'customer_romans' : 'naruse-home',
+    'order_id' : 0388,
     'filedata': filedata
   }
   let result = fetch(url,{
